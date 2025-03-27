@@ -7,8 +7,7 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post('register')
-  create(@Body() registerUserDto: RegisterUserDto) {
-    console.log('registerUserDto', registerUserDto);
-    return 'done';
+  register(@Body() registerUserDto: RegisterUserDto) {
+    return this.userService.register(registerUserDto);
   }
 }
