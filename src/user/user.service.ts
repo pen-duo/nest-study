@@ -9,7 +9,7 @@ export class UserService {
   constructor(private readonly dbService: DbService) {} // 使用构造器注入替代属性注入
 
   async register(registerUserDto: RegisterUserDto) {
-    const users: User[] = await this.dbService.read();
+    const users: User[] = await this.dbService.read<User>();
     const foundUser = users.find((item) => item.username === registerUserDto.username);
     if (foundUser) {
       throw new BadRequestException('该用户名已存在');
@@ -23,7 +23,7 @@ export class UserService {
   }
 
   async login(loginUserDto: LoginUserDto) {
-    const users: User[] = await this.dbService.read();
+    const users: User[] = await this.dbService.read<User>();
     const foundUser = users.find((item) => item.username === loginUserDto.username);
     if (!foundUser) {
       throw new BadRequestException('用户名用户不存在');
